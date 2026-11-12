@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chúc mừng sinh nhật</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎂%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;800&family=Pacifico&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16306b; --sky:#eff6ff; --mist:#dbeafe; --soft:#93c5fd; --blue:#3b82f6; --night:#0b1736;
+  --doodle:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M40 30l5 11 12 1-9 8 3 12-11-6-11 6 3-12-9-8 12-1z'/%3E%3Ccircle cx='190' cy='60' r='24'/%3E%3Cpath d='M190 84v22'/%3E%3Crect x='60' y='130' width='44' height='36' rx='4'/%3E%3Cpath d='M60 144h44M82 130v36M82 130c-14-16-26-4-12 0M82 130c14-16 26-4 12 0'/%3E%3Cpath d='M170 190l22-50 22 50z'/%3E%3Ccircle cx='192' cy='138' r='5'/%3E%3Cpath d='M30 220h8M34 216v8'/%3E%3Ccircle cx='120' cy='220' r='5'/%3E%3C/svg%3E");
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html,body{height:100%;margin:0}
+body{background:var(--night);font-family:'Baloo 2',system-ui,sans-serif;color:var(--ink);overflow:hidden;-webkit-tap-highlight-color:transparent}
+.scene{position:absolute;inset:0;display:none;align-items:center;justify-content:safe center;flex-direction:column;overflow-x:hidden;overflow-y:auto;padding:16px;box-sizing:border-box}
+.scene.on{display:flex}
+.scene::before{content:"";position:absolute;inset:0;-webkit-mask-image:var(--doodle);mask-image:var(--doodle);-webkit-mask-size:260px;mask-size:260px;pointer-events:none}
+.script{font-family:'Pacifico','Brush Script MT',cursive;font-weight:400}
+
+/* 1 – mở đầu */
+#s1{background:linear-gradient(160deg,#7cb4fb,#3b82f6 60%,#2563eb)}
+#s1::before{background:#fff;opacity:.4}
+.glass{position:relative;width:min(320px,82vw);padding:34px 22px 28px;text-align:center;color:#fff;border-radius:22px;
+  background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 18px 50px rgba(15,40,110,.28)}
+.glass h1{margin:0 0 26px;font:700 clamp(30px,10.5vw,46px)/1.15 'Dancing Script','Pacifico',cursive;white-space:nowrap;text-shadow:0 3px 14px rgba(15,40,110,.4)}
+.glass p{margin:0 0 22px;font-size:17px;opacity:.92}
+.btn{border:0;cursor:pointer;font:800 17px 'Baloo 2',sans-serif;padding:9px 34px;border-radius:99px;background:#fff;color:var(--blue);box-shadow:0 6px 18px rgba(15,40,110,.25);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:scale(.96)}
+.btn:focus-visible,.key:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* 2 – khóa */
+#s2{background:linear-gradient(180deg,#f4f9ff,#dbeafe)}
+#s2::before{background:var(--blue);opacity:.16}
+#s2>*{position:relative}
+.photo{background:#fff;border-radius:24px;padding:12px 12px 6px;text-align:center;box-shadow:0 12px 34px rgba(59,130,246,.22);cursor:pointer;margin-bottom:22px}
+.photo img{display:block;width:140px;height:140px;object-fit:cover;border-radius:16px;margin:0 auto 6px;background:var(--mist)}
+.photo small{font-size:14px;color:#4b6bb5}
+#s2 h2{margin:0 0 4px;font-size:25px}
+.q{margin:0 0 14px;color:#4b6bb5;font-size:16px;text-align:center;padding:0 24px}
+.dots{display:flex;align-items:center;gap:12px;min-width:210px;justify-content:center;padding:11px 20px;background:#fff;border:2px solid var(--soft);border-radius:14px;margin-bottom:16px;font-size:18px}
+.dots i{width:14px;height:14px;border-radius:50%;background:var(--mist);transition:background .15s,transform .15s}
+.dots i.f{background:var(--blue);transform:scale(1.12)}
+.dots.bad{animation:shake .45s}
+.dots.bad i{background:#f87171}
+@keyframes shake{20%,60%{transform:translateX(-9px)}40%,80%{transform:translateX(9px)}}
+.pad{display:grid;grid-template-columns:repeat(3,68px);gap:12px}
+.key{height:62px;border:0;border-radius:18px;font:800 22px 'Baloo 2',sans-serif;color:var(--ink);cursor:pointer;background:rgba(255,255,255,.75);box-shadow:0 3px 10px rgba(59,130,246,.15);transition:transform .1s,background .15s}
+.key:active{transform:scale(.92);background:var(--soft)}
+.key.ghost{visibility:hidden}
+.hint{margin-top:14px;font-size:13px;color:#4b6bb5}
+
+/* 3 – mưa chữ + hạt */
+#s3{background:var(--night)}
+#s3::before{display:none}
+canvas{position:absolute;inset:0;width:100%;height:100%}
+#fx{filter:drop-shadow(0 0 7px rgba(147,197,253,.75))}
+#cd{position:relative;font-size:min(34vw,170px);font-weight:800;color:var(--mist);text-shadow:0 0 34px rgba(147,197,253,.8);animation:pop .9s ease-out}
+@keyframes pop{from{transform:scale(1.7);opacity:0}30%{opacity:1}to{transform:scale(.95)}}
+#again{position:absolute;bottom:calc(28px + env(safe-area-inset-bottom,0px));display:none;background:rgba(219,234,254,.14);color:var(--mist);box-shadow:none;border:1px solid rgba(147,197,253,.5)}
+@media (min-width:768px){
+  .glass{width:440px;padding:50px 36px 40px;border-radius:28px}
+  .glass h1{font-size:60px}
+  .btn{font-size:20px;padding:11px 44px}
+  .photo img{width:190px;height:190px}.photo small{font-size:16px}
+  #s2 h2{font-size:34px}.q{font-size:19px}
+  .dots{min-width:260px;padding:13px 24px}
+  .pad{grid-template-columns:repeat(3,84px);gap:14px}.key{height:72px;font-size:26px}
+}
+@media (max-height:640px){
+  .photo{margin-bottom:12px}.photo img{width:96px;height:96px}
+  #s2 h2{font-size:21px}.q{margin-bottom:8px;font-size:14px}.dots{margin-bottom:10px}
+  .pad{grid-template-columns:repeat(3,58px);gap:8px}.key{height:46px;font-size:19px}.hint{display:none}
+}
+@media (prefers-reduced-motion:reduce){#cd,.dots.bad{animation:none}}
+</style>
+</head>
+<body>
+
+<section class="scene on" id="s1">
+  <div class="glass">
+    <h1 id="t1"></h1>
+    <button class="btn" id="go">Bắt đầu</button>
+  </div>
+</section>
+
+<section class="scene" id="s2">
+  <label class="photo" title="Chạm để đổi ảnh">
+    <img id="pic" src="anh.jpg">
+    <small>Happy Birthday</small>
+    <input type="file" id="file" accept="image/*" hidden>
+  </label>
+  <p class="q" id="q"></p>
+  <div class="dots" id="dots"></div>
+  <div class="pad" id="pad"></div>
+  <div class="hint">Nhập ngày và tháng, ví dụ 0101</div>
+</section>
+
+<section class="scene" id="s3">
+  <canvas id="rain"></canvas>
+  <canvas id="fx"></canvas>
+  <div id="cd"></div>
+  <button class="btn" id="again">Xem lại</button>
+</section>
+
+<script>
+/* ====== CHỈNH Ở ĐÂY ====== */
+const CFG = {
+  title: 'Happy Birthday',
+  sub: 'To my sister',
+  question: 'Sinh nhật của chị là ngày nào nhỉ?',
+  code: '1511',                       // ngày + tháng kỷ niệm (ddmm)
+  lines: [
+    'HAPPY BIRTHDAY',
+    'TO MY SISTER',
+    '15-11-2007',
+    ['CHÚC CHỊ\nQUỲNH THƯƠNG\nSINH NHẬT\nVUI VẺ\nMÃI XINH ĐẸP\nVÀ ĐẠT NHIỀU\nTHÀNH CÔNG\nTRONG\nCUỘC SỐNG',
+     'CHÚC CHỊ QUỲNH THƯƠNG\nSINH NHẬT VUI VẺ\nMÃI XINH ĐẸP\nVÀ ĐẠT NHIỀU THÀNH CÔNG\nTRONG CUỘC SỐNG']
+  ],
+  photo: 'anh.jpg'                         // dán đường dẫn ảnh vào đây, hoặc chạm vào ảnh để chọn
+};
+/* ========================= */
+
+const $ = id => document.getElementById(id);
+const show = id => { document.querySelectorAll('.scene').forEach(s => s.classList.toggle('on', s.id === id)); };
+
+$('t1').textContent = CFG.title; $('q').textContent = CFG.question;
+$('pic').src = CFG.photo || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'%3E%3Crect width='140' height='140' fill='%23dbeafe'/%3E%3Ccircle cx='70' cy='56' r='24' fill='%2393c5fd'/%3E%3Cpath d='M22 130c4-30 26-42 48-42s44 12 48 42z' fill='%2393c5fd'/%3E%3C/svg%3E";
+$('file').onchange = e => { const f = e.target.files[0]; if (f) $('pic').src = URL.createObjectURL(f); };
+$('go').onclick = () => show('s2');
+
+/* --- Khóa --- */
+let pin = '';
+const dots = $('dots');
+dots.innerHTML = '<span aria-hidden="true">🔒</span>' + [...CFG.code].map(() => '<i></i>').join('');
+const paint = () => dots.querySelectorAll('i').forEach((d, i) => d.classList.toggle('f', i < pin.length));
+['1','2','3','4','5','6','7','8','9','','0','⌫'].forEach(k => {
+  const b = document.createElement('button');
+  b.className = 'key' + (k === '' ? ' ghost' : ''); b.textContent = k; if (k) b.setAttribute('aria-label', k === '⌫' ? 'Xóa' : k);
+  b.onclick = () => {
+    if (k === '⌫') pin = pin.slice(0, -1); else if (k && pin.length < CFG.code.length) pin += k;
+    paint();
+    if (pin.length === CFG.code.length) {
+      if (pin === CFG.code) setTimeout(start, 350);
+      else { dots.classList.add('bad'); setTimeout(() => { dots.classList.remove('bad'); pin = ''; paint(); }, 500); }
+    }
+  };
+  $('pad').appendChild(b);
+});
+
+/* --- Mưa chữ --- */
+const rain = $('rain'), rc = rain.getContext('2d'), fx = $('fx'), fc = fx.getContext('2d');
+let W, H, drops = [], P = [], raf, timers = [];
+const GLYPH = 'HAPPYBIRTHDAY';
+function resize() {
+  W = rain.width = fx.width = innerWidth; H = rain.height = fx.height = innerHeight;
+  drops = Array.from({ length: Math.ceil(W / 16) }, () => Math.random() * -40);
+}
+addEventListener('resize', () => { if ($('s3').classList.contains('on')) resize(); });
+function loop() {
+  rc.fillStyle = 'rgba(11,23,54,.16)'; rc.fillRect(0, 0, W, H);
+  rc.font = '15px "Baloo 2",monospace';
+  drops.forEach((y, i) => {
+    rc.fillStyle = Math.random() > .96 ? 'rgba(219,234,254,.9)' : 'rgba(96,165,250,.38)';
+    rc.fillText(GLYPH[Math.random() * GLYPH.length | 0], i * 16, y * 16);
+    drops[i] = y * 16 > H && Math.random() > .975 ? 0 : y + .55;
+  });
+  fc.clearRect(0, 0, W, H);
+  fc.fillStyle = '#e6f1ff';
+  P.forEach(p => { p.x += (p.tx - p.x) * .085; p.y += (p.ty - p.y) * .085; fc.fillRect(p.x, p.y, W > 900 ? 3.8 : 3, W > 900 ? 3.8 : 3); });
+  raf = requestAnimationFrame(loop);
+}
+
+/* --- Hạt chữ --- */
+function sample(text) {
+  if (Array.isArray(text)) text = W < H ? text[0] : text[1];
+  const o = document.createElement('canvas'); o.width = W; o.height = H;
+  const x = o.getContext('2d'), sc = /[a-z]/.test(text), lh = sc ? 1.5 : 1.25;
+  const f = n => sc ? `400 ${n}px Pacifico,cursive` : `800 ${n}px "Baloo 2",sans-serif`;
+  x.font = f(100);
+  const L = text.split('\n'), mw = Math.max(...L.map(s => x.measureText(s).width));
+  const fs = Math.min(W > 900 ? 260 : 170, 100 * W * .92 / mw, H * .82 / (L.length * lh));
+  x.font = f(fs); x.textAlign = 'center'; x.textBaseline = 'middle'; L.forEach((s, i) => x.fillText(s, W / 2, H / 2 + (i - (L.length - 1) / 2) * fs * lh));
+  const d = x.getImageData(0, 0, W, H).data, out = [], s = W < 500 ? 3 : W > 1000 ? 5 : 4;
+  for (let y = 0; y < H; y += s) for (let i = 0; i < W; i += s) if (d[(y * W + i) * 4 + 3] > 128) out.push([i, y]);
+  return out.sort(() => Math.random() - .5);
+}
+function morph(text) {
+  const t = sample(text);
+  P.forEach((p, i) => { const q = t[i % t.length]; p.tx = q[0]; p.ty = q[1]; });
+  P.forEach(p => { p.x += (Math.random() - .5) * 60; p.y += (Math.random() - .5) * 60; });
+}
+
+/* --- Trình tự --- */
+async function start() {
+  show('s3'); resize(); cancelAnimationFrame(raf); timers.forEach(clearTimeout); timers = [];
+  $('again').style.display = 'none'; $('cd').style.display = 'block';
+  try {
+    const vi = 'àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđ';
+    await Promise.all([
+      document.fonts.load('800 100px "Baloo 2"', vi + vi.toUpperCase()),
+      document.fonts.load('400 100px Pacifico', vi + vi.toUpperCase())
+    ]);
+  } catch (e) {}
+  P = Array.from({ length: W < 500 ? 5500 : 8000 }, () => ({ x: Math.random() * W, y: Math.random() * H, tx: W / 2, ty: -20 }));
+  rc.fillStyle = '#0b1736'; rc.fillRect(0, 0, W, H); loop();
+  [3, 2, 1].forEach((n, i) => timers.push(setTimeout(() => {
+    const c = $('cd'); c.textContent = n; c.style.animation = 'none'; void c.offsetWidth; c.style.animation = '';
+  }, i * 950)));
+  timers.push(setTimeout(() => { $('cd').style.display = 'none'; }, 2850));
+  CFG.lines.forEach((l, i) => timers.push(setTimeout(() => morph(l), 3000 + i * 3300)));
+  timers.push(setTimeout(() => { $('again').style.display = 'block'; }, 3000 + CFG.lines.length * 3300));
+}
+$('again').onclick = start;
+</script>
+</body>
+</html>
